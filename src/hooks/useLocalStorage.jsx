@@ -1,20 +1,41 @@
-import {useState, useEffect} from 'react'
-import axios from 'axios'
+// import {useState} from 'react'
 
-const useLocalStorage = (initialValues) => {
-  const [coinData, setCoinData] = useState(initialValues.coinData);
-  const [darkMode, setDarkMode] = useState(initialValues.darkMode);
+// const useLocalStorage = (key, initialValues) =>{
 
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true"
-      )
-      .then((res) => setCoinData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
 
-  return [coinData, darkMode, setDarkMode];
+// const [storedValue, setStoredValue]= useState(() =>{
+//   if(localStorage.getItem(key)){
+//     return JSON.parse(localStorage.getItem(key))
+//   }
+//   localStorage.setItem(key, initialValues)
+// return initialValues
+// })
+
+// const setValue = value =>{
+//   setStoredValue(value);
+//   localStorage.setItem(key, value)
+// }
+// return [storedValue, setValue]
+
+// }
+
+// export default useLocalStorage
+
+import { useState } from 'react'
+
+const useLocalStorage = (key, initialValue) =>{
+    const [storedValue, setStoredValue] = useState(() => {
+        const item = window.localStorage.getItem(key);
+        return item ? JSON.parse(item) : initialValue;
+    });
+
+    const setValue = value => {
+        setStoredValue(value);
+        window.localStorage.setItem(key, JSON.stringify(value));
+    };
+
+    return [storedValue, setValue];
+
 };
 
 export default useLocalStorage

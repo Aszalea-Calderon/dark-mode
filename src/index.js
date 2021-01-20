@@ -1,19 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import useLocalStorage from "./hooks/useLocalStorage";
-
 import Charts from "./components/Charts";
 import Navbar from "./components/Navbar";
-
 import "./styles.scss";
+import useDataCall from "./hooks/useDataCall";
 
+//Setting initial Values
 const initialValues = {
   coinData: [],
   darkMode: false,
 };
 
+//Our app
 const App = () => {
-  const [coinData, darkMode, setDarkMode] = useLocalStorage(initialValues);
+  //Go to useDataCall
+  const [coinData, darkMode, setDarkMode] = useDataCall(initialValues);
 
   return (
     <div className={darkMode ? "dark-mode App" : "App"}>
