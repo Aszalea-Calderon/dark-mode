@@ -2,8 +2,11 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import useDarkMode from './useDarkMode'
 
+
+//This sets our state and handles our axios call.
 const useDataCall = (initialValues) => {
   const [coinData, setCoinData] = useState([]);
+  //This also sets our state for DarkMode
   const [darkMode, setDarkMode] = useDarkMode(initialValues.darkMode);
 
   //If time, break this down further and export out the call
